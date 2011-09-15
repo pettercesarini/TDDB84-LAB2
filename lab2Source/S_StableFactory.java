@@ -64,6 +64,7 @@ public class S_StableFactory {
 		return door;
 
 	}
+	
 
 	public static Door S_createDoor(Room r1, Room r2) {
 		Door door = new Door(r1, r2);

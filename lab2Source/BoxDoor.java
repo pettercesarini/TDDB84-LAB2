@@ -80,4 +80,12 @@ public class BoxDoor extends Door {
 	public MapSite cloneMe() {
 		return new BoxDoor(this.room1, this.room2);
 	}
+
+	// public void setSides(Room r1, Room r2) {
+	// move(r1, r2);
+	// r1.setSide(this);
+	// r2.setSide(this);
+	//
+	// }
+
 }

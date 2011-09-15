@@ -10,6 +10,7 @@ import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Vector;
 
 import javax.swing.JPanel;
 
@@ -140,7 +141,7 @@ public class StablePanel extends JPanel {
 	 */
 	public void prototypeConstruction() {
 		S_StablePrototypeFactory prototype = new S_StablePrototypeFactory();
-		Room room = new Room(0, 0);
+		Room room = S_StableFactory.S_getWalledRoom(0, 0);
 		prototype.addType("room", room);
 
 		BoxDoor boxDoor = new BoxDoor();
@@ -152,6 +153,50 @@ public class StablePanel extends JPanel {
 		System.out.println("" + prototype.getClone("room"));
 		System.out.println("" + prototype.getClone("door"));
 		System.out.println("" + prototype.getClone("boxDoor"));
+
+		Room box1 = ((Room) prototype.getClone("room")).S_setXY(0, 0);
+		Room box2 = ((Room) prototype.getClone("room")).S_setXY(1, 0);
+		Room box3 = ((Room) prototype.getClone("room")).S_setXY(2, 0);
+		Room box4 = ((Room) prototype.getClone("room")).S_setXY(0, 2);
+		Room box5 = ((Room) prototype.getClone("room")).S_setXY(1, 2);
+
+		Room korr1 = ((Room) prototype.getClone("room")).S_setXY(0, 1);
+		Room korr2 = ((Room) prototype.getClone("room")).S_setXY(1, 1);
+		Room korr3 = ((Room) prototype.getClone("room")).S_setXY(2, 1);
+
+		Room room1 = ((Room) prototype.getClone("room")).S_setXY(3, 1);
+		Room room2 = ((Room) prototype.getClone("room")).S_setXY(2, 2);
+
+		((BoxDoor) prototype.getClone("boxDoor")).setSides(box1, korr1);
+
+		((BoxDoor) prototype.getClone("boxDoor")).setSides(box2, korr2);
+		((BoxDoor) prototype.getClone("boxDoor")).setSides(box3, korr3);
+		((BoxDoor) prototype.getClone("boxDoor")).setSides(box4, korr1);
+		((BoxDoor) prototype.getClone("boxDoor")).setSides(box5, korr2);
+
+		((Door) prototype.getClone("door")).setSides(room1, korr3);
+		((Door) prototype.getClone("door")).setSides(room2, korr3);
+
+		korr1.setSide(korr2);
+		korr2.setSide(korr1);
+		korr2.setSide(korr3);
+		korr3.setSide(korr2);
+
+		Vector<Room> vector = new Vector<Room>();
+
+		vector.add(box1);
+		vector.add(box2);
+		vector.add(box3);
+		vector.add(box4);
+		vector.add(box5);
+		vector.add(korr1);
+		vector.add(korr2);
+		vector.add(korr3);
+		vector.add(room1);
+		vector.add(room2);
+		Stable.instance().S_clear();
+
+		Stable.instance().S_addRooms(vector);
 
 	}
 }

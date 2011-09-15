@@ -39,6 +39,7 @@ public class Door extends MapSite {
 	public String toString() {
 		return "Door";
 	}
+
 	/**
 	 * Gets the direction to the door form inside a room.
 	 * 
@@ -163,5 +164,11 @@ public class Door extends MapSite {
 		} else {
 			isOpen = true;
 		}
+	}
+
+	public void setSides(Room r1, Room r2) {
+		move(r1, r2);
+		r1.setSide(this);
+		r2.setSide(this);
 	}
 }

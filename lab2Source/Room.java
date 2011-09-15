@@ -29,9 +29,12 @@ public class Room extends MapSite {
 		return y;
 	}
 
-	public void S_setXY(int x, int y) {
+	public Room S_setXY(int x, int y) {
 		this.x = x;
 		this.y = y;
+		offsetX = 25 + x * roomSize;
+		offsetY = 25 + y * roomSize;
+		return this;
 	}
 
 	private int y;
@@ -40,6 +43,7 @@ public class Room extends MapSite {
 	public String toString() {
 		return "Room";
 	}
+
 	/**
 	 * Constructor that sets all the walls to be a NullSide.
 	 * 
